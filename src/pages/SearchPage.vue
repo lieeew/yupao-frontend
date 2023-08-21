@@ -3,8 +3,8 @@
     <van-search
         v-model="searchText"
         show-action
-        placeholder="请输入要搜索的标签"
-        @search="onSearch"
+        placeholder="搜索对应标签的用户: "
+        @search="doSearchResult"
         @cancel="onCancel"
     />
   </form>
@@ -12,7 +12,7 @@
   <div v-if="activeIds.length === 0">请选择标签</div>
   <van-row gutter="16" style="padding: 0 16px">
     <van-col v-for="tag in activeIds">
-      <van-tag closeable size="small" type="primary" @close="doClose(tag)">
+      <van-tag closeable size="medium" type="primary" @close="doClose(tag)">
         {{ tag }}
       </van-tag>
     </van-col>
@@ -60,9 +60,8 @@ let tagList = ref(originTagList);
 
 /**
  * 搜索过滤
- * @param val
  */
-const onSearch = (val) => {
+const onSearch = () => {
   tagList.value = originTagList.map(parentTag => {
     const tempChildren = [...parentTag.children];
     const tempParentTag = {...parentTag};
