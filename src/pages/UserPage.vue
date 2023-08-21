@@ -1,13 +1,13 @@
 <template>
   <van-cell-group>
     <van-cell title="昵称" is-link to="/user/edit" :value="userInfor.username"/>
-    <van-cell title="账号" is-link to="/user.edit" :value="userInfor.userAccount"/>
-    <van-cell title="头像" is-link to="/user.edit">
+    <van-cell title="账号" is-link to="/user/edit" :value="userInfor.userAccount"/>
+    <van-cell title="头像" is-link to="/user/edit">
       <img style="height: 48px" :src="userInfor.avatarUrl"/>
     </van-cell>
-    <van-cell title="性别" is-link to="/user.edit" :value="userInfor.gender" @click="toEdit('gender', '性别' ,userInfor.gender)" />
-    <van-cell title="电话" is-link to="/user.edit" :value="userInfor.phone"  @click="toEdit('phone', '电话' ,userInfor.phone)"/>
-    <van-cell title="邮箱" is-link to="/user.edit" :value="userInfor.email"  @click="toEdit('email', '邮箱' ,userInfor.email)"/>
+    <van-cell title="性别" is-link to="/user/edit" :value="userInfor.gender" @click="toEdit('gender', '性别' ,userInfor.gender)" />
+    <van-cell title="电话" is-link to="/user/edit" :value="userInfor.phone"  @click="toEdit('phone', '电话' ,userInfor.phone)"/>
+    <van-cell title="邮箱" is-link to="/user/edit" :value="userInfor.email"  @click="toEdit('email', '邮箱' ,userInfor.email)"/>
     <van-cell title="星球编号" :value="userInfor.planetCode"/>
     <van-cell title="注册时间" :value="userInfor.createTime.toDateString()"/>
   </van-cell-group>
