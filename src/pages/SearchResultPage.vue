@@ -36,9 +36,9 @@ onMounted(async () => {
     }
   })
       .then(function (response) {
-        console.log('user/search/tags success hahah', response);
+        console.log('user/search/tags success', response);
         // console.log(response.data.data)
-        return response.data.data;
+        return response.data;
       })
       .catch(function (error) {
         console.log('user/search/tags error', error);
@@ -50,6 +50,7 @@ onMounted(async () => {
       }
     })
     userList.value = userListDate;
+    console.log('userList ', userList)
   }
 })
 // const mockUser = {
