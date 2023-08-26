@@ -1,9 +1,9 @@
 <template>
   <van-form @submit="onSubmit">
     <van-field
-        v-model="editUser.editValue"
-        :name="editUser.editKey"
-        :label="editUser.editName"
+        v-model="editUser.editValue as string"
+        :name="editUser.editKey as string"
+        :label="editUser.editName as string"
         :placeholder="`请输入${editUser.editName}`"
     />
     <div style="margin: 16px;">
@@ -37,7 +37,7 @@ const onSubmit = async () => {
     [editUser.value.editKey as string]: editUser.value.editValue,
   })
   console.log(res, '登录页面返回')
-  if (res.code === 0 && res.date > 0) {
+  if (res.date > 0) {
     router.back();
   } else {
     alert('修改失败')
