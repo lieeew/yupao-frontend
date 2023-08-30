@@ -11,12 +11,15 @@ import UserListCard from "../components/userListCard.vue";
 const userList = ref([]);
 onMounted(async () => {
   const userListDate = await myAxios.get('/user/recommend', {
-    params: {},
+    params: {
+      pageSize: 20,
+      pageNum: 1,
+    },
   })
       .then(function (response) {
         console.log('/user/recommend success', response);
         // console.log(response.data.data)
-        return response.data;
+        return response?.data?.records;
       })
       .catch(function (error) {
         console.log('/user/recommend error', error);
