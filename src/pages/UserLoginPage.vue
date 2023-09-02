@@ -41,11 +41,11 @@ const onSubmit = async () => {
     "userAccount": username.value,
     "userPassword": password.value,
   })
-  console.log(res, '用户登录');
+  // console.log(res, '用户登录');
   if (res.code === 0 && res.data) {
     alert('登录成功');
     // 跳转到之前的页面
-    window.location.href = route.query?.redirect as string ?? '/';
+    // window.location.href = route.query?.redirect as string ?? '/';
   } else {
     alert('登录失败');
   }
