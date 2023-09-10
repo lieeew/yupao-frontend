@@ -38,7 +38,7 @@ onMounted(async () => {
       }
     })
     userList.value = userListDate;
-    console.log('userList ', userList)
+    console.log('userList value -> ', userList)
   }
 })
 // const mockUser = {
