@@ -1,25 +1,19 @@
-import { createApp } from 'vue'
-// 1. Import the components you need
-import Vant from 'vant';
-import * as VueRouter from 'vue-router';
+import {createApp} from 'vue'
 import App from './App.vue'
-import routes from "./config/router.ts";
+import * as VueRouter from 'vue-router';
+import routes from "./config/route";
+import Vant from 'vant';
 import 'vant/lib/index.css';
+import '../global.css'
 
 const app = createApp(App);
+app.use(Vant);
 
-// creat router instance
 const router = VueRouter.createRouter({
-    // Provide the history implementation to use. We are using the hash history for simplicity here.
-    history: VueRouter.createWebHashHistory(),
-    routes, // short for `routes: routes`
+    // 内部提供了 history 模式的实现。为了简单起见，我们在这里使用 hash 模式。
+    history: VueRouter.createWebHistory(),
+    routes, // `routes: routes` 的缩写
 })
 
-// 直接全部引入了,但是建议是按需引入
-app.use(Vant);
 app.use(router);
-app.mount("#app");
-
-
-
-
+app.mount('#app')

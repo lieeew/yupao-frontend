@@ -1,52 +1,56 @@
 <template>
-  <UserListCard :user-list="userList" />
+  <user-card-list :user-list="userList" />
   <van-empty v-if="!userList || userList.length < 1" description="搜索结果为空" />
 </template>
 
 <script setup lang="ts">
+import {onMounted, ref} from 'vue';
 import {useRoute} from "vue-router";
-import {onMounted, ref} from "vue";
+import myAxios from "../plugins/myAxios";
+import {Toast} from "vant";
 import qs from 'qs';
-import myAxios from "../plugins/myAxios.ts";
-import UserListCard from "../components/userListCard.vue";
+import UserCardList from "../components/UserCardList.vue";
 
 const route = useRoute();
 const {tags} = route.query;
+
 const userList = ref([]);
+
 onMounted(async () => {
-  const userListDate = await myAxios.get('/user/search/tags', {
+  const userListData = await myAxios.get('/user/search/tags', {
     params: {
-      tagNameList: tags,
+      tagNameList: tags
     },
-    // qd 里是请求转化的库
     paramsSerializer: params => {
       return qs.stringify(params, {indices: false})
     }
   })
       .then(function (response) {
-        console.log('user/search/tags success', response);
-        // console.log(response.data.data)
-        return response.data;
+        console.log('/user/search/tags succeed', response);
+        return response?.data;
       })
       .catch(function (error) {
-        console.log('user/search/tags error', error);
-      });
-  if (userListDate) {
-    userListDate.forEach(user => {
+        console.error('/user/search/tags error', error);
+        Toast.fail('请求失败');
+      })
+  console.log(userListData)
+  if (userListData) {
+    userListData.forEach(user => {
       if (user.tags) {
-        user.tags = JSON.parse(user.tags)
+        user.tags = JSON.parse(user.tags);
       }
     })
-    userList.value = userListDate;
-    console.log('userList value -> ', userList)
+    userList.value = userListData;
   }
 })
+
+
 // const mockUser = {
 //   id: 12345,
 //   username: '鱼皮',
 //   userAccount: '12314',
 //   profile: '一名精神小伙，目前还有头发，谢谢大家，阿爸爸阿爸爸阿巴阿巴阿巴',
-//   avatarUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+//   avatarUrl: 'https://636f-codenav-8grj8px727565176-1256524210.tcb.qcloud.la/img/logo.png',
 //   gender: 0,
 //   phone: '13113113111',
 //   email: '592342843721987@xzcxzczxcz.com',
@@ -56,9 +60,9 @@ onMounted(async () => {
 //   createTime: new Date(),
 // }
 
+
 </script>
 
 <style scoped>
-
 
 </style>

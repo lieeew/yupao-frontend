@@ -2,19 +2,19 @@
   <van-form @submit="onSubmit">
     <van-cell-group inset>
       <van-field
-          v-model="username"
-          name="用户名"
-          label="用户名"
-          placeholder="请输入用户名"
-          :rules="[{ required: true, message: 'Username is required' }]"
+          v-model="userAccount"
+          name="userAccount"
+          label="账号"
+          placeholder="请输入账号"
+          :rules="[{ required: true, message: '请填写用户名' }]"
       />
       <van-field
-          v-model="password"
+          v-model="userPassword"
           type="password"
-          name="密码"
+          name="userPassword"
           label="密码"
           placeholder="请输入密码"
-          :rules="[{ required: true, message: 'Password is required' }]"
+          :rules="[{ required: true, message: '请填写密码' }]"
       />
     </van-cell-group>
     <div style="margin: 16px;">
@@ -26,33 +26,34 @@
 </template>
 
 <script setup lang="ts">
+import {useRoute, useRouter} from "vue-router";
 import {ref} from "vue";
-import {useRoute} from "vue-router";
-import myAxios from "../plugins/myAxios.ts";
+import myAxios from "../plugins/myAxios";
+import {Toast} from "vant";
 
-
+const router = useRouter();
 const route = useRoute();
-// 用户名 + 密码
-// v-model 是双向绑定
-const username = ref('');
-const password = ref('');
-const onSubmit = async () => {
-  const res = await myAxios.post('/user/login',{
-    "userAccount": username.value,
-    "userPassword": password.value,
-  })
 
+const userAccount = ref('');
+const userPassword = ref('');
+
+const onSubmit = async () => {
+  const res = await myAxios.post('/user/login', {
+    userAccount: userAccount.value,
+    userPassword: userPassword.value,
+  })
   if (res.code === 0 && res.data) {
-    alert('登录成功');
+    Toast.success('登录成功');
     // 跳转到之前的页面
-    window.location.href = route.query?.redirect as string ?? '/';
+    const redirectUrl = route.query?.redirect as string ?? '/';
+    window.location.href = redirectUrl;
   } else {
-    alert('登录失败');
+    Toast.fail('登录失败');
   }
 };
+
 </script>
 
 <style scoped>
-
 
 </style>
