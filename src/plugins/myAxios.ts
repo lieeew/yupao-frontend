@@ -1,4 +1,7 @@
 import axios, {AxiosInstance} from "axios";
+import routes from "../config/route";
+import {useRouter} from "vue-router";
+import {Toast} from "vant";
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -23,6 +26,7 @@ myAxios.interceptors.response.use(function (response) {
     console.log('我收到你的响应啦', response)
     // 未登录则跳转到登录页
     if (response?.data?.code === 40100) {
+        // Toast.fail("未登录")
         const redirectUrl = window.location.href;
         window.location.href = `/user/login?redirect=${redirectUrl}`;
     }
@@ -34,3 +38,6 @@ myAxios.interceptors.response.use(function (response) {
 });
 
 export default myAxios;
+
+
+
