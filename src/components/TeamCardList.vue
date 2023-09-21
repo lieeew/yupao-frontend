@@ -29,7 +29,7 @@
       <template #footer>
         <van-button size="small"
                     type="primary"
-                    v-if="team.userId !== currentUser?.id && team.memberCount < team.maxNum && !team.userList?.some(user => user.id === this.currentUser?.id)"
+                    v-if="team.userId !== currentUser?.id && team.memberCount < team.maxNum && !team.userList?.some(user => user.id === currentUser?.id)"
                     plain
                     @click="preJoinTeam(team)">
           加入队伍
@@ -39,7 +39,7 @@
         </van-button>
         <!-- 仅加入队伍可见 -->
         <van-button
-            v-if="team.userId !== currentUser?.id && team.userList?.some(user => user.id === this.currentUser?.id)"
+            v-if="team.userId !== currentUser?.id && team.userList?.some(user => user.id === currentUser?.id)"
             size="small" plain
             @click="doQuitTeam(team.id)">退出队伍
         </van-button>
