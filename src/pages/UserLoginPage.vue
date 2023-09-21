@@ -21,6 +21,12 @@
       <van-button round block type="primary" native-type="submit">
         提交
       </van-button>
+      <br>
+      <router-link to="/user/register">
+        <van-button round block type="primary">
+          注册
+        </van-button>
+      </router-link>
     </div>
   </van-form>
 </template>
@@ -51,7 +57,6 @@ const onSubmit = async () => {
     Toast.fail('登录失败');
   }
 };
-
 </script>
 
 <style scoped>
